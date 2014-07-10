@@ -1,0 +1,12 @@
+#!/usr/bin/env perl
+use v5.10;
+use strict;
+use warnings;
+
+use Monocrat::App;
+use Try::Tiny;
+
+try { Monocrat::App->new_with_cmd }
+catch { s/ at \S+ line \d+.*$//m; 1 while chomp; die "$_\n" };
+
+1;
