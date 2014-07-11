@@ -1,16 +1,17 @@
 requires "CPAN::Meta::Requirements" => "0";
 requires "Carp" => "0";
+requires "DDP" => "0";
 requires "JSON" => "0";
 requires "Module::Runtime" => "0";
 requires "MongoDB" => "0";
 requires "Moo" => "0";
 requires "Moo::Role" => "0";
+requires "MooX::Cmd" => "0";
+requires "MooX::Options" => "0";
 requires "MooseX::Role::Logger" => "0";
-requires "Net::EmptyPort" => "0";
 requires "Path::Tiny" => "0";
-requires "Proc::Guard" => "0";
-requires "Sys::Hostname" => "0";
-requires "Try::Tiny::Retry" => "0.004";
+requires "Try::Tiny" => "0";
+requires "Try::Tiny::Retry" => "0";
 requires "Types::Path::Tiny" => "0";
 requires "Types::Standard" => "0";
 requires "Version::Next" => "0";
@@ -25,7 +26,10 @@ on 'test' => sub {
   requires "ExtUtils::MakeMaker" => "0";
   requires "File::Spec::Functions" => "0";
   requires "List::Util" => "0";
-  requires "Test::More" => "0";
+  requires "Test::Deep" => "0";
+  requires "Test::FailWarnings" => "0";
+  requires "Test::Fatal" => "0";
+  requires "Test::More" => "0.96";
 };
 
 on 'test' => sub {

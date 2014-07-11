@@ -3,6 +3,10 @@ use v5.10;
 use strict;
 use warnings;
 
+package monocrat;
+# ABSTRACT: deploy MongoDB from the command line
+# VERSION
+
 use Monocrat::App;
 use Try::Tiny;
 

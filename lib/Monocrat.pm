@@ -26,7 +26,7 @@ use YAML::XS;
 use Moo;
 use Module::Runtime qw/require_module/;
 use Types::Standard -types;
-use Types::Path::Tiny qw/AbsFile/;
+use Types::Path::Tiny qw/AbsPath/;
 use namespace::clean;
 
 my %CLUSTER_MAP = (
@@ -38,7 +38,8 @@ my %CLUSTER_MAP = (
 
 has config_file => (
     is      => 'ro',
-    isa     => Str,
+    isa     => AbsPath,
+    coerce  => AbsPath->coercion,
     default => '',
 );
 
@@ -76,7 +77,7 @@ has cluster => (
 
 sub _build_cluster {
     my ($self) = @_;
-    my $class = $CLUSTER_MAP{ $self->type };
+    my $class = $CLUSTER_MAP{ $self->cluster_type };
     require_module($class);
     return $class->new( config => $self->config, );
 }

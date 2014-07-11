@@ -22,6 +22,7 @@ package Monocrat::App;
 
 use Moo;
 
+use Monocrat;
 use MooX::Cmd;
 use MooX::Options;
 use Types::Path::Tiny qw/AbsPath/;
@@ -36,8 +37,19 @@ option 'config_file' => (
     doc     => 'YAML file for the cluster (default monocrat.yml)',
 );
 
+has monocrat => (
+    is      => 'lazy',
+    isa     => InstanceOf ['Monocrat'],
+    handles => [qw/cluster/],
+);
+
+sub _build_monocrat {
+    my ($self) = @_;
+    return Monocrat->new( config_file => $self->config_file );
+}
+
 sub execute {
-    my ( $self, $args ) = @_;
+    my ( $self, $args_ref, $chain_ref ) = @_;
     say "Usage: $0 <command> [options...]";
 }
 
@@ -47,15 +59,19 @@ sub BUILD {
       unless -r $self->config_file;
 }
 
-package Monocrat::App::Cmd::Dump;
+package # hide
+  Monocrat::App::Cmd::Dump;
 
 use Moo;
 use MooX::Cmd;
 
 sub execute {
-    my ($self) = @_;
-    say "in Dump";
+    my ( $self, $args_ref, $chain_ref ) = @_;
+    my ($app) = @$chain_ref;
 
+    use Data::Dumper;
+    local $Data::Dumper::Indent = 1;
+    print Data::Dumper->Dump( [ $app->cluster ], ['$cluster'] );
 }
 
 1;

@@ -39,7 +39,8 @@ has set_name => (
 
 around 'munge_server_config' => sub {
     my $orig = shift;
-    my $copy = $orig->(@_);
+    my $self = shift;
+    my $copy = $orig->( $self, @_ );
     $copy->{args} = join( " ", ( $copy->{args} // () ), "--replSet", $self->set_name );
     return $copy;
 };
