@@ -30,7 +30,7 @@ use Types::Path::Tiny qw/AbsPath/;
 use namespace::clean;
 
 my %CLUSTER_MAP = (
-    single  => "Monocrat::Cluster::Single",
+    single  => "Monocrat::Cluster::SingleServer",
     replica => "Monocrat::Cluster::ReplicaSet",
 );
 
