@@ -1,0 +1,10 @@
+---
+type: single
+defaults:
+  sudo_user: root
+  args: -v --noprealloc --nojournal --smallfiles --nohttpinterface --quiet
+  version: 2.6
+mongod:
+  - hostname: mongo@host1.example.com
+
+# vim: ts=2 sts=2 sw=2 et:

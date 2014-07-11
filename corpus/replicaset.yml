@@ -1,0 +1,15 @@
+---
+type: replica
+setName: foo
+defaults:
+  sudo_user: root
+  args: -v --noprealloc --nojournal --smallfiles --nohttpinterface --quiet
+  version: 2.6
+mongod:
+  - hostname: mongo@host1.example.com
+  - hostname: mongo@host2.example.com
+  - hostname: mongo@host3.example.com
+    rs_config:
+      arbiterOnly: true
+
+# vim: ts=2 sts=2 sw=2 et:
